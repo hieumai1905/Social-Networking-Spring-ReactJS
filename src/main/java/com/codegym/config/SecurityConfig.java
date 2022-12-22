@@ -90,7 +90,6 @@ public class SecurityConfig {
     }
 //"ROLE_USER","ROLE_ADMIN"
 
-
     @Bean
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
