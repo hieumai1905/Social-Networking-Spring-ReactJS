@@ -24,4 +24,28 @@ public class TypeRelationShip {
 
     @OneToMany(mappedBy = "typeRelationShip")
     List<Relation> relations;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTypeRelationshipName() {
+        return typeRelationshipName;
+    }
+
+    public void setTypeRelationshipName(String typeRelationshipName) {
+        this.typeRelationshipName = typeRelationshipName;
+    }
+
+    public List<Relation> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(List<Relation> relations) {
+        this.relations = relations;
+    }
 }

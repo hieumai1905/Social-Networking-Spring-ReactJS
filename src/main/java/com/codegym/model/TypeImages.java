@@ -9,7 +9,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "type_images")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class TypeImages {
@@ -22,4 +21,28 @@ public class TypeImages {
 
     @OneToMany(mappedBy = "typeImages")
     private List<Image> images;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTypeImageName() {
+        return typeImageName;
+    }
+
+    public void setTypeImageName(String typeImageName) {
+        this.typeImageName = typeImageName;
+    }
+
+    public List<Image> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Image> images) {
+        this.images = images;
+    }
 }
