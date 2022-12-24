@@ -36,4 +36,44 @@ public class Relation {
     public void preCreate() {
         changeAt = new Date();
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Date getChangeAt() {
+        return changeAt;
+    }
+
+    public void setChangeAt(Date changeAt) {
+        this.changeAt = changeAt;
+    }
+
+    public TypeRelationShip getTypeRelationShip() {
+        return typeRelationShip;
+    }
+
+    public void setTypeRelationShip(TypeRelationShip typeRelationShip) {
+        this.typeRelationShip = typeRelationShip;
+    }
+
+    public AppUser getUserCurrent() {
+        return userCurrent;
+    }
+
+    public void setUserCurrent(AppUser userCurrent) {
+        this.userCurrent = userCurrent;
+    }
+
+    public AppUser getUserFriend() {
+        return userFriend;
+    }
+
+    public void setUserFriend(AppUser userFriend) {
+        this.userFriend = userFriend;
+    }
 }
