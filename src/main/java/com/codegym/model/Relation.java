@@ -25,12 +25,12 @@ public class Relation {
     private TypeRelationShip typeRelationShip;
 
     @ManyToOne
-    @JoinColumn(name = "user_account_id", nullable = false)
-    private Account userAccount;
+    @JoinColumn(name = "app_user_current_id",  nullable = false)
+    private AppUser userCurrent;
 
     @ManyToOne
-    @JoinColumn(name = "friend_account_id", nullable = false)
-    private Account friendAccount;
+    @JoinColumn(name = "app_user_friend_id", nullable = false)
+    private AppUser userFriend;
 
     @PrePersist
     public void preCreate() {

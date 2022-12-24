@@ -6,6 +6,7 @@ import lombok.*;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -41,6 +42,21 @@ public class AppUser {
     @JoinColumn(name = "accountId", unique = true,
             nullable = false, updatable = false)
     private Account account;
+
+    @OneToMany(mappedBy = "user")
+    private List<Post> posts;
+
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes;
+
+    @OneToMany(mappedBy = "userCurrent")
+    private List<Relation> relationUser;
+
+    @OneToMany(mappedBy = "userFriend")
+    private List<Relation> relationsFriend;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
 
     public Long getId() {
         return id;
