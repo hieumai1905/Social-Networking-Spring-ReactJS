@@ -49,6 +49,19 @@ public class PostService implements IPostService {
 
     @Override
     public Post findById(Long id) {
+<<<<<<< HEAD
         return postRepository.findById(id).orElse(null);
+=======
+        try{
+            Post post = postRepository.findById(id).orElse(null);
+            if (post == null) {
+                throw new Exception("Post is null");
+            }
+            return post;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
+>>>>>>> cb8a1e9a53d05bd5058778f6cc4d623288e4c91a
     }
 }

@@ -1,6 +1,9 @@
 package com.codegym.controller;
 
+<<<<<<< HEAD
 import com.codegym.model.Account;
+=======
+>>>>>>> cb8a1e9a53d05bd5058778f6cc4d623288e4c91a
 import com.codegym.model.Post;
 import com.codegym.service.post.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
