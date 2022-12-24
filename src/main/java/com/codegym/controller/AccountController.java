@@ -18,7 +18,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-// de them lien ket trong database ta theme spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL5InnoDBDialect
 
 @RestController
 @CrossOrigin("*")
@@ -26,7 +25,6 @@ import java.util.Set;
 public class AccountController {
     @Autowired
     private JwtService jwtService;
-
     @Autowired
     private AccountService accountService;
 

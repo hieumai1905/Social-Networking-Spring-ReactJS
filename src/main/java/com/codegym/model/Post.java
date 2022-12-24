@@ -32,8 +32,8 @@ public class Post {
     private Date createAt;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @JoinColumn(name = "app_user_id")
+    private AppUser user;
     @ManyToOne
     @JoinColumn(name = "status_id")
     private Status status;

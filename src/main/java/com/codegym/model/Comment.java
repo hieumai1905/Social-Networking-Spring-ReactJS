@@ -28,8 +28,8 @@ public class Comment {
     private Date commentAt;
 
     @ManyToOne
-    @JoinColumn(name = "account_id")
-    private Account account;
+    @JoinColumn(name = "app_user_id")
+    private AppUser user;
 
     @ManyToOne
     @JoinColumn(name = "post_id")
