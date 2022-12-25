@@ -32,7 +32,6 @@ public class Post {
 
     @ManyToOne
     @JoinColumn(name = "app_user_id")
-    @JsonIgnore
     private AppUser user;
     @ManyToOne
     @JoinColumn(name = "status_id")
