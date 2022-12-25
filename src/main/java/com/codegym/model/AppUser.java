@@ -6,6 +6,7 @@ import lombok.*;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -17,6 +18,16 @@ import java.util.Set;
 @NoArgsConstructor
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class AppUser {
+    public static final String ADMIN = "ROLE_ADMIN";
+    public static final String USER = "ROLE_USER";
+
+    public static final String MAN = "MAN";
+    public static final String WOMAN = "WOMAN";
+    public static final String OTHER = "OTHER";
+
+    public static final String ACTIVE = "ACTIVE";
+    public static final String INACTIVE = "INACTIVE";
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
@@ -27,15 +38,19 @@ public class AppUser {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate DOB;
-    private String address;
-    private String image;
-    private String BGImage;
-    private String gender;
+
+//    @OneToMany(mappedBy = "user")
+//    private List<Relation> relationUser;
+//
+//    @OneToMany(mappedBy = "targetUser")
+//    private List<Relation> relationsTarget;
+
+    @OneToMany(mappedBy = "account")
+    private List<Post> posts;
 
     @Column(nullable = false, length = 50, unique = true)
     private String email;
-    private String phoneNumber;
-    private String aboutMe;
+
     private String status;
     @OneToOne
     @JoinColumn(name = "accountId", unique = true,
