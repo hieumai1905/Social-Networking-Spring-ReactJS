@@ -59,6 +59,11 @@ public class LikeService implements ILikeService {
     }
 
     @Override
+    public void deleteAllByCommentId(Long id) {
+        likeRepository.deleteAllByCommentId(id);
+    }
+
+    @Override
     public List<Like> findAllByPostIdAndCommentIdIsNull(Long id) {
         return likeRepository.findAllByPostIdAndCommentIdIsNull(id);
     }

@@ -173,6 +173,7 @@ public class PostController {
         Comment comment = commentService.findById(cmtId);
         if (comment != null && post != null) {
             post.setCommentCount(post.getCommentCount() - 1);
+            likeService.deleteAllByCommentId(cmtId);
             postService.save(post);
             commentService.delete(cmtId);
             return new ResponseEntity<>(HttpStatus.OK);
