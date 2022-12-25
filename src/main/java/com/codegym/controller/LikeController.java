@@ -36,11 +36,14 @@ public class LikeController {
         if (likes.stream().noneMatch(like -> Objects.equals(like.getUser().getId(), userId))) {
             Like like = new Like();
             like.setPost(post);
+            like.getPost().setLikeCount(like.getPost().getLikeCount() + 1);
             like.setUser(user);
             likeService.save(like);
             return ResponseEntity.ok(like);
         } else {
             Like like = likes.stream().filter(like1 -> Objects.equals(like1.getUser().getId(), userId)).findFirst().get();
+            like.getPost().setLikeCount(like.getPost().getLikeCount() - 1);
+            likeService.save(like);
             likeService.delete(like.getId());
             return ResponseEntity.ok(like);
         }
