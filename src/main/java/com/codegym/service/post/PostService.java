@@ -23,9 +23,6 @@ public class PostService implements IPostService {
     @Override
     public boolean save(Post post) {
         try {
-            if (post == null) {
-                throw new Exception("Post is null");
-            }
             postRepository.save(post);
             return true;
         } catch (Exception e) {
