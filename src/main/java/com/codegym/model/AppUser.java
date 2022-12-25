@@ -45,9 +45,6 @@ public class AppUser {
 //    @OneToMany(mappedBy = "targetUser")
 //    private List<Relation> relationsTarget;
 
-    @OneToMany(mappedBy = "account")
-    private List<Post> posts;
-
     @Column(nullable = false, length = 50, unique = true)
     private String email;
 
@@ -56,6 +53,13 @@ public class AppUser {
     @JoinColumn(name = "accountId", unique = true,
             nullable = false, updatable = false)
     private Account account;
+
+
+    @OneToMany(mappedBy = "user")
+    private List<Like> likes;
+
+    @OneToMany(mappedBy = "user")
+    private List<Comment> comments;
 
     public Long getId() {
         return id;

@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Table(name = "status")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Status {
@@ -23,4 +22,28 @@ public class Status {
 
     @OneToMany(mappedBy = "status")
     private List<Post> posts;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getStatusName() {
+        return statusName;
+    }
+
+    public void setStatusName(String statusName) {
+        this.statusName = statusName;
+    }
+
+    public List<Post> getPosts() {
+        return posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
 }
