@@ -25,55 +25,15 @@ public class Relation {
     private TypeRelationShip typeRelationShip;
 
     @ManyToOne
-    @JoinColumn(name = "app_user_current_id",  nullable = false)
-    private AppUser userCurrent;
+    @JoinColumn(name = "user_id", nullable = false)
+    private AppUser user;
 
     @ManyToOne
-    @JoinColumn(name = "app_user_friend_id", nullable = false)
-    private AppUser userFriend;
+    @JoinColumn(name = "target_user_id", nullable = false)
+    private AppUser targetUser;
 
     @PrePersist
     public void preCreate() {
         changeAt = new Date();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getChangeAt() {
-        return changeAt;
-    }
-
-    public void setChangeAt(Date changeAt) {
-        this.changeAt = changeAt;
-    }
-
-    public TypeRelationShip getTypeRelationShip() {
-        return typeRelationShip;
-    }
-
-    public void setTypeRelationShip(TypeRelationShip typeRelationShip) {
-        this.typeRelationShip = typeRelationShip;
-    }
-
-    public AppUser getUserCurrent() {
-        return userCurrent;
-    }
-
-    public void setUserCurrent(AppUser userCurrent) {
-        this.userCurrent = userCurrent;
-    }
-
-    public AppUser getUserFriend() {
-        return userFriend;
-    }
-
-    public void setUserFriend(AppUser userFriend) {
-        this.userFriend = userFriend;
     }
 }

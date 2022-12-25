@@ -48,7 +48,7 @@ public class Account1 {
     @Temporal(TemporalType.DATE)
     private Date birthday;
 
-    @Column(length = 500)
+    @Column(length = 255)
     private String address;
 
     @Column(name = "display_name", length = 100)
