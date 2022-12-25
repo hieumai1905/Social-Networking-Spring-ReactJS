@@ -38,9 +38,6 @@ public class Post {
     private Status status;
 
     @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
-
-    @OneToMany(mappedBy = "post")
     private List<Image> images;
 
     public Long getId() {
@@ -97,14 +94,6 @@ public class Post {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
     }
 
     public List<Image> getImages() {

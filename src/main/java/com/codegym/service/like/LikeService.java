@@ -52,4 +52,19 @@ public class LikeService implements ILikeService {
     public List<Like> findAllByPostId(Long id) {
         return likeRepository.findAllByPostId(id);
     }
+
+    @Override
+    public void deleteAllByPostId(Long id) {
+        likeRepository.deleteAllByPostId(id);
+    }
+
+    @Override
+    public List<Like> findAllByPostIdAndCommentIdIsNull(Long id) {
+        return likeRepository.findAllByPostIdAndCommentIdIsNull(id);
+    }
+
+    @Override
+    public List<Like> findAllByPostIdAndCommentIdIsNotNull(Long id) {
+        return likeRepository.findAllByPostIdAndCommentIdIsNotNull(id);
+    }
 }

@@ -9,4 +9,9 @@ import java.util.List;
 @Repository
 public interface ILikeRepository extends JpaRepository<Like, Long> {
     List<Like> findAllByPostId(Long id);
+
+    void deleteAllByPostId(Long id);
+    List<Like> findAllByPostIdAndCommentIdIsNull(Long id);
+
+    List<Like> findAllByPostIdAndCommentIdIsNotNull(Long id);
 }

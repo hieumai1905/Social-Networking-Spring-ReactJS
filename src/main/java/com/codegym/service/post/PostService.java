@@ -33,9 +33,8 @@ public class PostService implements IPostService {
 
     @Override
     public boolean delete(Long id) {
-        Post post = postRepository.findById(id).orElse(null);
         try{
-            postRepository.delete(post);
+            postRepository.deleteById(id);
             return true;
         } catch (Exception e) {
             System.out.println(e.getMessage());

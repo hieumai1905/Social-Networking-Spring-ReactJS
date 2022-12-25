@@ -2,11 +2,7 @@ package com.codegym.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "status")
@@ -19,9 +15,6 @@ public class Status {
 
     @Column(name = "status_name", nullable = false)
     private String statusName;
-
-    @OneToMany(mappedBy = "status")
-    private List<Post> posts;
 
     public Long getId() {
         return id;
@@ -39,11 +32,4 @@ public class Status {
         this.statusName = statusName;
     }
 
-    public List<Post> getPosts() {
-        return posts;
-    }
-
-    public void setPosts(List<Post> posts) {
-        this.posts = posts;
-    }
 }
