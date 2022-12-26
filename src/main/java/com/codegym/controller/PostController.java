@@ -1,11 +1,9 @@
 package com.codegym.controller;
 
-import com.codegym.model.AppUser;
-import com.codegym.model.Comment;
-import com.codegym.model.Like;
-import com.codegym.model.Post;
+import com.codegym.model.*;
 import com.codegym.service.appUserService.IAppUserService;
 import com.codegym.service.comment.ICommentService;
+import com.codegym.service.image.IImageService;
 import com.codegym.service.like.ILikeService;
 import com.codegym.service.post.IPostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +32,9 @@ public class PostController {
 
     @Autowired
     private ICommentService commentService;
+
+    @Autowired
+    private IImageService imageService;
 
     //--------------------------------POST--------------------------------//
 
@@ -82,8 +83,6 @@ public class PostController {
         postService.save(post);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
-
-
     @PutMapping("/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post post) {
         Post currentPost = postService.findById(id);
@@ -223,6 +222,17 @@ public class PostController {
             return new ResponseEntity<>(HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    //--------------------------------------------------------------------//
+
+    //--------------------------------IMAGES------------------------------//
+    @GetMapping("/{id}/images")
+    public ResponseEntity<List<Image>> getAllImagesByPostId(@PathVariable Long id) {
+        List<Image> images = imageService.findAllByPostId(id);
+        if (images.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(images);
     }
     //--------------------------------------------------------------------//
 

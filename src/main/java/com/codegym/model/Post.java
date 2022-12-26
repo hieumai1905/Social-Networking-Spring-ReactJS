@@ -37,9 +37,6 @@ public class Post {
     @JoinColumn(name = "status_id")
     private Status status;
 
-    @OneToMany(mappedBy = "post")
-    private List<Image> images;
-
     public Long getId() {
         return id;
     }
@@ -94,14 +91,6 @@ public class Post {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
     }
 
     @PrePersist

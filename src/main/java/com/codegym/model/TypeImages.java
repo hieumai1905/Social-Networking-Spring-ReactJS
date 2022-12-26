@@ -19,9 +19,6 @@ public class TypeImages {
     @Column(name = "type_image_name", nullable = false)
     private String typeImageName;
 
-    @OneToMany(mappedBy = "typeImages")
-    private List<Image> images;
-
     public Long getId() {
         return id;
     }
@@ -36,13 +33,5 @@ public class TypeImages {
 
     public void setTypeImageName(String typeImageName) {
         this.typeImageName = typeImageName;
-    }
-
-    public List<Image> getImages() {
-        return images;
-    }
-
-    public void setImages(List<Image> images) {
-        this.images = images;
     }
 }
