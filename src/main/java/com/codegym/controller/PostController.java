@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin("*")
@@ -34,6 +35,9 @@ public class PostController {
     @Autowired
     private ICommentService commentService;
 
+    //--------------------------------POST--------------------------------//
+
+    // findAllPost dùng để lấy ra tất cả các bài viết của người dùng đang đăng nhập
     @GetMapping
     public ResponseEntity<List<Post>> findAllPost() {
         List<Post> posts = postService.findAll();
@@ -43,8 +47,9 @@ public class PostController {
         return new ResponseEntity<>(posts, HttpStatus.OK);
     }
 
+    // getPostById dùng để lấy ra bài viết theo id của bài viết đối với người dùng đang đăng nhập
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getUserById(@PathVariable Long id) {
+    public ResponseEntity<Object> getPostById(@PathVariable Long id) {
         Post post = postService.findById(id);
         if (post != null) {
             return new ResponseEntity<Object>(post, HttpStatus.OK);
@@ -52,11 +57,32 @@ public class PostController {
         return new ResponseEntity<Object>("NULL", HttpStatus.NO_CONTENT);
     }
 
+    // getPostByUserId dùng để lấy ra bài viết theo id của bài viết và theo id của người dùng khác, không bao gồm bài viết private
+    @GetMapping("/{idPost}/user/{idUser}")
+    public ResponseEntity<Object> getPostByUserId(@PathVariable Long idPost, @PathVariable Long idUser) {
+        Optional<Post> post = postService.findPostByUserIdAndPostId(idUser, idPost);
+        if (post.isPresent()) {
+            return new ResponseEntity<Object>(post, HttpStatus.OK);
+        }
+        return new ResponseEntity<Object>("NULL", HttpStatus.NO_CONTENT);
+    }
+
+    // getAllPostByUserOther dùng để lấy ra tất cả các bài viết của người dùng khác theo id người dùng, không bao gồm bài viết private
+    @GetMapping("/user/{id}")
+    public ResponseEntity<List<Post>> getAllPostByUserOther(@PathVariable Long id) {
+        List<Post> posts = (List<Post>) postService.findAllPostStatusIsPublic(id);
+        if (posts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(posts, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Post> savePost(@RequestBody Post post) {
         postService.save(post);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post post) {
@@ -69,6 +95,7 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    // deletePost dùng để xóa bài viết theo id của bài viết đối với người dùng đang đăng nhập, tất cả các comment và like của bài viết đó cũng sẽ bị xóa
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deletePost(@PathVariable Long id) {
         Post post = postService.findById(id);
@@ -81,6 +108,12 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    //--------------------------------------------------------------------//
+
+
+    //--------------------------------LIKE--------------------------------//
+
+    // likePost dùng để thêm/huỷ like cho bài viết theo id của bài viết và id của người dùng
     @GetMapping("/{postId}/like/users/{userId}")
     public ResponseEntity<Like> likePost(@PathVariable Long postId, @PathVariable Long userId) {
         List<Like> likes = likeService.findAllByPostIdAndCommentIdIsNull(postId);
@@ -102,6 +135,7 @@ public class PostController {
         }
     }
 
+    // likeComment dùng để thêm/huỷ like cho comment theo id của comment và id của người dùng
     @GetMapping("/{postId}/cmts/{idCmt}/like/users/{userId}")
     public ResponseEntity<Like> likeComment(@PathVariable Long postId, @PathVariable Long idCmt, @PathVariable Long userId) {
         List<Like> likes = likeService.findAllByPostIdAndCommentIdIsNotNull(postId);
@@ -125,6 +159,7 @@ public class PostController {
         }
     }
 
+    // getAllLikeByPostId dùng để lấy ra tất cả các like của bài viết theo id của bài viết
     @GetMapping("/{postId}/likes")
     public ResponseEntity<List<Like>> getAllLikeByPostId(@PathVariable Long postId) {
         List<Like> likes = likeService.findAllByPostId(postId);
@@ -134,8 +169,14 @@ public class PostController {
         return ResponseEntity.ok(likes);
     }
 
+    //--------------------------------------------------------------------//
+
+
+    //-------------------------------COMMENT------------------------------//
+
+    // getAllCommentByPostId dùng để lấy ra tất cả các comment của bài viết theo id của bài viết
     @GetMapping("/{postId}/cmts")
-    public ResponseEntity<List<Comment>> getAllByPostId(@PathVariable Long postId) {
+    public ResponseEntity<List<Comment>> getAllCommentByPostId(@PathVariable Long postId) {
         List<Comment> comments = commentService.findAllByPostId(postId);
         if (comments.isEmpty()) {
             return ResponseEntity.noContent().build();
@@ -143,6 +184,7 @@ public class PostController {
         return ResponseEntity.ok(comments);
     }
 
+    // commentPost dùng để thêm comment cho bài viết theo id của bài viết và id của người dùng
     @PostMapping("/{postId}/cmts/users/{userId}")
     public ResponseEntity<Comment> commentPost(@PathVariable Long postId, @PathVariable Long userId, @RequestBody Comment comment) {
         Post post = postService.findById(postId);
@@ -155,6 +197,7 @@ public class PostController {
         return ResponseEntity.ok(comment);
     }
 
+    // updateComment dùng để cập nhật comment theo id của comment và id của người dùng, nội dung comment được lấy từ body
     @PutMapping("/{postId}/cmts/{cmtId}")
     public ResponseEntity<Comment> updateComment(@PathVariable Long postId, @PathVariable Long cmtId, @RequestBody Comment comment) {
         Post post = postService.findById(postId);
@@ -167,6 +210,7 @@ public class PostController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
+    // deleteComment dùng để xóa comment theo id của post và id của comment
     @DeleteMapping("/{postId}/cmts/{cmtId}")
     public ResponseEntity<Comment> deleteComment(@PathVariable Long postId, @PathVariable Long cmtId) {
         Post post = postService.findById(postId);
@@ -180,5 +224,6 @@ public class PostController {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+    //--------------------------------------------------------------------//
 
 }

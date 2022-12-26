@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -45,5 +46,15 @@ public class PostService implements IPostService {
     @Override
     public Post findById(Long id) {
         return postRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public Iterable<Post> findAllPostStatusIsPublic(Long id) {
+        return postRepository.findAllPostStatusIsPublicOfUserId(id);
+    }
+
+    @Override
+    public Optional<Post> findPostByUserIdAndPostId(Long idUser, Long idPost) {
+        return postRepository.findPostByUserIdAndPostId(idUser, idPost);
     }
 }

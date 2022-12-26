@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 public class Status {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_status")
     private Long id;
 
     @Column(name = "status_name", nullable = false)
