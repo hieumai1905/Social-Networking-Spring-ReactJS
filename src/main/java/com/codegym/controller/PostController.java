@@ -6,6 +6,7 @@ import com.codegym.service.comment.ICommentService;
 import com.codegym.service.image.IImageService;
 import com.codegym.service.like.ILikeService;
 import com.codegym.service.post.IPostService;
+import com.codegym.service.status.IStatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.HttpStatus;
@@ -35,6 +36,9 @@ public class PostController {
 
     @Autowired
     private IImageService imageService;
+
+    @Autowired
+    private IStatusService statusService;
 
     //--------------------------------POST--------------------------------//
 
@@ -80,6 +84,10 @@ public class PostController {
 
     @PostMapping
     public ResponseEntity<Post> savePost(@RequestBody Post post) {
+        AppUser user = appUserService.findById(post.getUser().getId());
+        Status status = statusService.findById(post.getStatus().getId());
+        post.setUser(user);
+        post.setStatus(status);
         postService.save(post);
         return new ResponseEntity<>(post, HttpStatus.CREATED);
     }
