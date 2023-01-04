@@ -14,7 +14,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TypeRelationShip {
+public class TypeRelationship {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

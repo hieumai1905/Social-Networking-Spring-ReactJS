@@ -34,14 +34,14 @@ public class AccountController {
 
     /* ---------------- GET ALL USER ------------------------ */
     @RequestMapping(value = "", method = RequestMethod.GET)
-    public ResponseEntity<List<Account>> getAllUser() {
+    public ResponseEntity<List<Account>> getAllAccounts() {
         List<Account> list = accountService.findAll();
         return new ResponseEntity<List<Account>>(list, HttpStatus.OK);
     }
 
     /* ---------------- GET USER BY ID ------------------------ */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public ResponseEntity<Object> getUserById(@PathVariable Long id) {
+    public ResponseEntity<Object> getAccountById(@PathVariable Long id) {
         Account account = accountService.findById(id);
         if (account != null) {
             return new ResponseEntity<Object>(account, HttpStatus.OK);
@@ -65,7 +65,7 @@ public class AccountController {
 
     /* ---------------- DELETE USER ------------------------ */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteUserById(@PathVariable Long id) {
+    public ResponseEntity<String> deleteAccountById(@PathVariable Long id) {
         accountService.delete(id);
         return new ResponseEntity<String>("Deleted!", HttpStatus.OK);
     }
