@@ -11,4 +11,5 @@ public interface ILikeService extends IGeneralService<Like> {
     void deleteAllByCommentId(Long id);
     List<Like> findAllByPostIdAndCommentIdIsNotNull(Long id);
     List<Like> findAllByPostIdAndCommentIdIsNull(Long id);
+    List<Like> findAllByPostIdAndCommentId(Long postId, Long commentId);
 }

@@ -11,9 +11,13 @@ public interface ILikeRepository extends JpaRepository<Like, Long> {
     List<Like> findAllByPostId(Long id);
 
     void deleteAllByPostId(Long id);
+
     void deleteAllByCommentId(Long id);
+
     List<Like> findAllByPostIdAndCommentIdIsNull(Long id);
 
     List<Like> findAllByPostIdAndCommentIdIsNotNull(Long id);
+
+    List<Like> findAllByPostIdAndCommentId(Long postId, Long commentId);
 
 }
