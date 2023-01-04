@@ -26,6 +26,14 @@ public class AppUserController {
     AppUserDTOService appUserDTOService;
 
 
+    @GetMapping("/{id}")
+    public ResponseEntity<AppUser> getUserById(@PathVariable Long id) {
+        AppUser appUser = appUserService.findById(id);
+        if (appUser == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(appUser);
+    }
     @GetMapping("/account/{id}")
     public ResponseEntity<AppUser> getUserByAccountId(@PathVariable Long id) {
         AppUser appUser = appUserService.findByAccount(id);
