@@ -10,7 +10,7 @@ import java.io.OutputStream;
 
 @Service
 public class AppUserDTOService {
-    private final String FILE_PATH = "src\\pitnik-MXH-views\\pitnik-MXH\\images\\avatar\\";
+    private final String FILE_PATH = "src\\image\\";
     public boolean saveImg(MultipartFile img, long time){
         if (img == null) return true;
         File file = new File(FILE_PATH,time+"-"+img.getOriginalFilename());

@@ -19,7 +19,7 @@ public interface IRelationRepo extends JpaRepository<Relation, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE relationship\n" +
+    @Query(value = "UPDATE relation \n" +
             "SET relation_type_id = :typeId \n" +
             "WHERE id = :relationId ;", nativeQuery = true)
     int modifyRelationType(@Param("relationId") Long relationId,

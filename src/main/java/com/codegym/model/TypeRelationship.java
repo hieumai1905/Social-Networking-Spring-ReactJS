@@ -16,7 +16,6 @@ import java.util.List;
 @AllArgsConstructor
 public class TypeRelationship {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "type_relation_name", nullable = false)

@@ -21,7 +21,7 @@ public class RelationshipController {
     private final Long PENDING = 2l;
     private final Long FOLLOW = 3l;
     private final Long BLOCK = 4l;
-    private final Long NO = 5l;
+    private final Long NO = 0l;
     @Autowired
     RelationService relationshipService;
     @Autowired

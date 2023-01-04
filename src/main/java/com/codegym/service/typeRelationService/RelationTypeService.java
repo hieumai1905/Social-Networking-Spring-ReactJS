@@ -6,11 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class RelationTypeService implements IRelationTypeService{
+public class RelationTypeService implements IRelationTypeService {
     @Autowired
     private IRelationTypeRepo relationTypeRepo;
+
     @Override
     public List<TypeRelationship> findAll() {
         return relationTypeRepo.findAll();
@@ -28,6 +30,33 @@ public class RelationTypeService implements IRelationTypeService{
 
     @Override
     public TypeRelationship findById(Long id) {
-        return relationTypeRepo.findById(id).orElse(null);
+        Optional<TypeRelationship> relationshipOptional = relationTypeRepo.findById(id);
+        if (relationshipOptional.isEmpty()) {
+            int Tid = Math.toIntExact(id);
+            String name = "";
+            switch (Tid) {
+                case 0:
+                    name = "NO";
+                    break;
+                case 1:
+                    name = "FRIEND";
+                    break;
+                case 2:
+                    name = "PENDING";
+                    break;
+                case 3:
+                    name = "WAIT_ACCEPT";
+                    break;
+                case 4:
+                    name = "BLOCK";
+                    break;
+                case 5:
+                    name = "FOLLOW";
+                    break;
+            }
+            save(TypeRelationship.builder().id(id).typeRelationshipName(name).build());
+            relationshipOptional  = relationTypeRepo.findById(id);
+        }
+        return relationshipOptional.orElse(null);
     }
 }
