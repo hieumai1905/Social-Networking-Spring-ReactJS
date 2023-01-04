@@ -176,6 +176,16 @@ public class PostController {
         return ResponseEntity.ok(likes);
     }
 
+    // getAllLikeByCommentId dùng để lấy ra tất cả các like của comment theo id của comment
+    @GetMapping("/{postId}/cmts/{idCmt}/likes")
+    public ResponseEntity<List<Like>> getAllLikeByCommentId(@PathVariable Long postId, @PathVariable Long idCmt) {
+        List<Like> likes = likeService.findAllByPostIdAndCommentId(postId, idCmt);
+        if (likes.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(likes);
+    }
+
     //--------------------------------------------------------------------//
 
 

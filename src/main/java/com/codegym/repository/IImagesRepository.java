@@ -15,4 +15,7 @@ public interface IImagesRepository extends JpaRepository<Image, Long> {
 
     @Query(value = "select * from ", nativeQuery = true)
     List<Image> findAllAvatarByUserId(@Param("id") Long id);
+
+    @Query(value = "select * from ", nativeQuery = true)
+    List<Image> findAllCoverByUserId(@Param("id") Long id);
 }

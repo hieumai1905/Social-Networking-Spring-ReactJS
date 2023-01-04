@@ -51,4 +51,14 @@ public class ImageService implements IImageService {
     public List<Image> findAllByPostId(Long id) {
         return imagesRepository.findAllByPostId(id);
     }
+
+    @Override
+    public List<Image> findAllAvatarByUserId(Long id) {
+        return imagesRepository.findAllAvatarByUserId(id);
+    }
+
+    @Override
+    public List<Image> findAllCoverByUserId(Long id) {
+        return imagesRepository.findAllCoverByUserId(id);
+    }
 }
