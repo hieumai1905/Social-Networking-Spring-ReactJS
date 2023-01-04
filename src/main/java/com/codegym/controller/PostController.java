@@ -46,6 +46,7 @@ public class PostController {
     @GetMapping
     public ResponseEntity<List<Post>> findAllPost() {
         List<Post> posts = postService.findAll();
+        posts.sort((o1, o2) -> o2.getCreateAt().compareTo(o1.getCreateAt()));
         if (posts.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
